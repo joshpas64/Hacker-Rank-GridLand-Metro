@@ -118,7 +118,6 @@ public class LinkedLister {
 		{
 			if(currNode.getStartCol() <= start && currNode.getEndCol() >= end)
 			{
-				System.out.println("No Match :(");
 				return -1;
 			}
 			else if(currNode.getStartCol() > start && prevNode.getEndCol() <= start)
@@ -160,10 +159,6 @@ public class LinkedLister {
 			prevNode = currNode;
 			currNode = currNode.getNext();
 			index++;
-		}
-		if(check == -1)
-		{
-			System.out.println("NO MATCHES :(");
 		}
 		return check;
 	}
