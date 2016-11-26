@@ -1,4 +1,4 @@
-
+//Object representation of rows by which tracks are placed on in the proble,
 public class Track {
 	private int row;
 	private int mTracks;
@@ -6,49 +6,51 @@ public class Track {
 	private boolean isEmpty;
 	private int currentSpaceOccupations;
 	private int totalTracks;
-	public Track(int rowNumber, int cols)
+	public Track(int rowNumber, int cols)//Can only be initialized in this manor 
 	{
-		row = rowNumber;
-		mTracks = cols;
-		linked = new LinkedLister();
+		row = rowNumber; //The linked list will be associated with a certain row number
+		mTracks = cols; //The maximum endCol() value a track can hold
+		linked = new LinkedLister(); //The linked list to sort and manage tracks in the row
 		isEmpty = true;
-		currentSpaceOccupations = 0;
-		totalTracks = 0;
+		currentSpaceOccupations = 0; //Total space occcupied by the tracks in the row, intersections DO NOT double count
+		totalTracks = 0; //Total number of tracks entered into row, intersecting or not
 	}
 	public void add(TrackRow tRow)
 	{
-		if(!verify(tRow))
+		if(!verify(tRow))//Invalid Trow Data is discarded and not added to the row
 			return;
-		if(isEmpty || linked.getLength() == 0)
+		if(isEmpty || linked.getLength() == 0) //In case of empty linkedlist
 		{
-			linked.add(tRow.getStartCol(),tRow.getEndCol(), 1);
+			linked.add(tRow.getStartCol(),tRow.getEndCol(), 1); //set it as the head node
 			isEmpty = false;
 		}
 		else
 		{
-			linked.checkStart(tRow.getStartCol(),tRow.getEndCol());
+			linked.checkStart(tRow.getStartCol(),tRow.getEndCol()); //Check its start and end columns, and place
+			//it where it seems fit, if it spans any new columns
 		}
 		totalTracks++;
 	}
 	public int getTotalTracks()
 	{
-		return totalTracks;
+		return totalTracks; //See how many valid tracks a user has entered into the row, does not filter out intersections
 	}
 	public int getSpaceOccupations()
 	{
 		if(linked.getLength() == 0)
 		{
-			isEmpty = true;
+			isEmpty = true; //If list empty, immediately return 0
 			return 0;
 		}
-		currentSpaceOccupations = linked.getSpaceOccupation();
+		currentSpaceOccupations = linked.getSpaceOccupation();//Calculate from linked list and return
 		return currentSpaceOccupations;
 	}
 	public int getUniqueTracks()
 	{
-		return linked.getLength();
+		return linked.getLength(); //Tracks in the row that dont have any intersections, unless column width is very high
+		//This value will likely get lower as more tracks are added
 	}
-	public String toString()
+	public String toString() //Once again not needed just for pretty and informative llu
 	{
 		String result = String.format("This data is for row %d in the grid of tracks!\n\n", row);
 		if(linked.getLength() == 0)
@@ -67,7 +69,9 @@ public class Track {
 		return result;
 	}
 	private boolean verify(TrackRow tRow)
-	{
+	{ //Since input comes from console try to filter common invalid cases i.e. endcol > mTracks;startCol < 1 ; or the rows do not match at a;;
+		// Another if statement to check is if EndCol >= startCol but that can be fixed with the statement 
+		//tRow.setDimensions([tRow.getRow(), tRow.getEndCol,tRow.getStartCol())
 		if(tRow.getStartCol() < 1 || tRow.getEndCol() > mTracks || tRow.getEndCol() < tRow.getStartCol() || tRow.getRow() != row)
 			return false;
 		return true;
