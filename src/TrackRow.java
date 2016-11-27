@@ -1,5 +1,8 @@
-
+// All tracks objects with attributes of row number , starting column, and ending column
+// If this was C++ a struct would most likely used in its place
 public class TrackRow {
+	//Since TrackRow is just a collection of attributes its implementation is basically just properly adding the right
+	//getter and setter methods for each attribute
 	private int rowNumber;
 	private int startCol;
 	private int endCol;
@@ -7,6 +10,15 @@ public class TrackRow {
 	{
 		rowNumber = startCol = endCol = 0;
 	}
+	//Looking back this method could also be overloaded fairly easy without having to deal with arrays
+	/*
+	public void set(int row, int sCol, int eCol)
+	{
+		rowNumber = row;
+		startCol = sCol;
+		endCol = eCol;
+	}
+	*/
 	public void setDimensions(int[] dimensions, int iter)
 	{
 		for(int i = 0; i < iter; i++)
@@ -26,6 +38,7 @@ public class TrackRow {
 			}
 		}
 	}
+	//Getter Methods
 	public int getStartCol()
 	{
 		return startCol;
@@ -38,6 +51,7 @@ public class TrackRow {
 	{
 		return rowNumber;
 	}
+	//Not needed for main program but might be hepful for testing
 	public String toString()
 	{
 		String result = "";
