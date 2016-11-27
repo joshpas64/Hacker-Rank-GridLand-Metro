@@ -2,6 +2,7 @@ import java.io.*;
 public class Metro {
 	public static void main(String[] args) throws IOException{
 		// TODO Auto-generated method stub
+		//Below comments were for testing can ignore
 		/*
 		LineNumberReader in = new LineNumberReader(new InputStreamReader(System.in));
 		System.out.println("Just doing some testing");
@@ -52,6 +53,7 @@ public class Metro {
 		System.out.print(linked);
 		*/
 		TrackFunction tf = new TrackFunction();
+		tf.run();
 	}
 
 }
